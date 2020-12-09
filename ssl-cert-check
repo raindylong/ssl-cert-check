@@ -907,8 +907,8 @@ then
     IFS=$'\n'
     for LINE in `egrep -v '(^#|^$)' ${SERVERFILE}`
     do
-        HOST=${LINE%% *}
-        PORT=${LINE#* }
+        HOST=$(echo ${LINE} | awk -F\: '{print $1}')
+        PORT=$(echo ${LINE} | awk -F\: '{print $2}')
         IFS=" "
         if [ "$PORT" = "FILE" ]
         then
